@@ -56,7 +56,7 @@ public class Payment {
     }
 
     public Payment(String date, double amount, String description, double incomingInterest, double outgoingInterest) {
-        this.Payment(date,amount,description); //use other constructor to not duplicate code
+        this(date,amount,description); //use other constructor to not duplicate code
         this.incomingInterest = incomingInterest;
         this.outgoingInterest = outgoingInterest;
     }

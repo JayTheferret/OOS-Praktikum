@@ -9,8 +9,8 @@ public class Payment {
 
 
     //Zinsen -> pos Wert von 0 bis 1
-    double incomingInterest; //bei Einzahlung/Deposit
-    double outgoingInterest; //bei Auszahlung/Withdrawal
+    double incomingInterest = 0; //bei Einzahlung/Deposit
+    double outgoingInterest = 0; //bei Auszahlung/Withdrawal
 
     //getter and setter
     public String getDate() {
@@ -71,10 +71,12 @@ public class Payment {
     }
 
     public void printObject(){
-        System.out.print("Date: " + this.date);
-        System.out.print("Amount: " + this.amount);
-        System.out.print("Description: " + this.description);
-        System.out.print("Incoming Interest: " + this.incomingInterest);
-        System.out.print("Outgoing Interest: " + this.outgoingInterest);
+        System.out.println("  --------------Payment--------------");
+        System.out.println("  Date:              " + this.date);
+        System.out.println("  Amount:            " + this.amount);
+        System.out.println("  Description:       " + this.description);
+        System.out.println("  Incoming Interest: " + this.incomingInterest);
+        System.out.println("  Outgoing Interest: " + this.outgoingInterest);
+        System.out.println("  -----------------------------------");
     };
 }

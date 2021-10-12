@@ -7,8 +7,8 @@ public class Transfer {
     double amount; //Geldmenge (nur positiv (-> muss nicht überprueft werden))
     String description; //Beschreibung des Vorgangs
 
-    String sender; //Sender
-    String recipient; //Empfänger
+    String sender = "unknown"; //Sender
+    String recipient = "unknown"; //Empfänger
 
     //getter and setter
 
@@ -69,10 +69,13 @@ public class Transfer {
     }
 
     public void printObject(){
-        System.out.print("Date: " + this.date);
-        System.out.print("Amount: " + this.amount);
-        System.out.print("Description: " + this.description);
-        System.out.print("Sender: " + this.sender);
-        System.out.print("Recipient: " + this.recipient);
+
+        System.out.println("  --------------Payment--------------");
+        System.out.println("  Date:              " + this.date);
+        System.out.println("  Amount:            " + this.amount);
+        System.out.println("  Description:       " + this.description);
+        System.out.println("  Sender:            " + this.sender);
+        System.out.println("  Recipient:         " + this.recipient);
+        System.out.println("  -----------------------------------");
     };
 }

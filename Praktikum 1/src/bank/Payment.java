@@ -61,8 +61,8 @@ public class Payment {
         this.outgoingInterest = outgoingInterest;
     }
 
-    //copy constructor
-    Payment(Payment a){
+    //copy constructor -> make new object based on old object
+    public Payment(Payment a){
         date = a.date;
         amount = a.amount;
         description = a.description;
@@ -71,7 +71,10 @@ public class Payment {
     }
 
     public void printObject(){
-        System.out.print("Date: ");
-        System.out.print(this.date);
+        System.out.print("Date: " + this.date);
+        System.out.print("Amount: " + this.amount);
+        System.out.print("Description: " + this.description);
+        System.out.print("Incoming Interest: " + this.incomingInterest);
+        System.out.print("Outgoing Interest: " + this.outgoingInterest);
     };
 }

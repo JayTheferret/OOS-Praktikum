@@ -46,4 +46,33 @@ public class Transfer {
     public void setRecipient(String recipient) {
         this.recipient = recipient;
     }
+
+    public Transfer(String date, double amount, String description) {
+        this.date = date;
+        this.amount = amount;
+        this.description = description;
+    }
+
+    public Transfer(String date, double amount, String description, String sender, String recipient) {
+        this(date,amount,description);
+        this.sender = sender;
+        this.recipient = recipient;
+    }
+
+    //copy constructor -> make new object based on old object
+    public Transfer(Transfer a){
+        date = a.date;
+        amount = a.amount;
+        description = a.description;
+        sender = a.sender;
+        recipient = a.recipient;
+    }
+
+    public void printObject(){
+        System.out.print("Date: " + this.date);
+        System.out.print("Amount: " + this.amount);
+        System.out.print("Description: " + this.description);
+        System.out.print("Sender: " + this.sender);
+        System.out.print("Recipient: " + this.recipient);
+    };
 }

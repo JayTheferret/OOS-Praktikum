@@ -60,7 +60,7 @@ public class Transfer {
     }
 
     //copy constructor -> make new object based on old object
-    public Transfer(Transfer a){
+    public Transfer(Transfer a){ //Konstruktor 2 nutzen!
         date = a.date;
         amount = a.amount;
         description = a.description;

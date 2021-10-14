@@ -70,6 +70,7 @@ public class Payment {
         outgoingInterest = a.outgoingInterest;
     }
 
+    //ausgabe
     public void printObject(){
         System.out.println("  --------------Payment--------------");
         System.out.println("  Date:              " + this.date);

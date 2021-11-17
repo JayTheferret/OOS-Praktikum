@@ -3,7 +3,7 @@ import bank.Transfer;
 
 import java.util.Scanner;
 
-public class Praktikum2 {
+public class Praktikum3 {
     public static void main(String [] args){
         System.out.println("Konstruktoren + Ausgabe mit toString()");
         System.out.println("1 - Erstelle Payment mit Konstruktor 1");

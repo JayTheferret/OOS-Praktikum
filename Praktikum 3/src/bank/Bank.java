@@ -19,7 +19,7 @@ public interface Bank {
      * @param account the account to be added
      * @throws AccountAlreadyExistsException if the account already exists
      */
-    void createAccount(String account) throws AccountAlreadyExistsException;
+    void createAccount(String account) throws AccountAlreadyExistsException, AccountAlreadyExistsException;
 
     /**
      * Adds an account (with all specified transactions) to the bank. If the account already exists,

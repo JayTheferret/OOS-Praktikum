@@ -1,5 +1,9 @@
 package bank;
 
+/**
+ * class to handle Incoming Transfers
+ * used to give positive values for incoming Transfers
+ */
 public class IncomingTransfer extends Transfer{
 
     public IncomingTransfer(Transfer a) {

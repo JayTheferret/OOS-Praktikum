@@ -8,6 +8,12 @@ import bank.exceptions.TransactionDoesNotExistException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * class for a bank. Provides multiple methods to handle the interaction between
+ *  * accounts and transactions.
+ *  and sorts lists of Transactions
+ *  implements the interface bank
+ */
 public class PrivateBank implements Bank {
 
     private String name;

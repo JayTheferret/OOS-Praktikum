@@ -8,6 +8,12 @@ import bank.exceptions.TransactionDoesNotExistException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+/**
+ * class for a bank(alt version). Provides multiple methods to handle the interaction between
+ *  * accounts and transactions.
+ *  and sorts lists of Transactions
+ *  implements the interface bank
+ */
 public class PrivateBankAlt implements Bank {
 
    private  String name;
@@ -133,20 +139,42 @@ public class PrivateBankAlt implements Bank {
 
     public  double getAccountBalanceAlt(String account){
 
-        double balance = 0;
+        /*double balance = 0;
 
         for(int i = 0; i < accountsToTransactions.get(account).size(); i++){
 
             if(accountsToTransactions.get(account).get(i) instanceof Transfer){
-                if(account == ((Transfer) accountsToTransactions.get(account).get(i)).getSender()){
+                if(account.equals(((Transfer) accountsToTransactions.get(account).get(i)).getSender())){
                     balance -= accountsToTransactions.get(account).get(i).calculate();
+                }
+                else if(!account.equals(((Transfer) accountsToTransactions.get(account).get(i)).getSender())){
+                    balance += accountsToTransactions.get(account).get(i).calculate();
                 }
             }
             else {//bei payment objekten und incoming
-                balance += balance += accountsToTransactions.get(account).get(i).calculate();
+               balance += accountsToTransactions.get(account).get(i).calculate();
+            }
+        }*/
+
+        double balance = 0.0;
+
+        for (Transaction transaction : accountsToTransactions.get(account)) {
+
+            if (transaction instanceof Transfer) {
+                Transfer transfer = (Transfer) transaction;
+
+                if (account.equals(transfer.getSender())) {
+                    balance -= transfer.calculate();
+                } else {
+                    balance += transfer.calculate();
+                }
+
+            } else {
+                balance += transaction.calculate();
             }
         }
-        return 0;
+
+        return balance;
     }
 
     public List<Transaction> getTransactions(String account) {

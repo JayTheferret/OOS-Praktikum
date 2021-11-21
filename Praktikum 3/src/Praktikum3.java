@@ -13,6 +13,7 @@ public class Praktikum3 {
         System.out.println("Praktikum 3");
         System.out.println(" 1 - print Private Bank (print(toString))");
         System.out.println(" 2 - test equals");
+        System.out.println("-------------------------------------------");
         System.out.println(" 3 - create 2 accounts(with only Name)in Bank1");
         System.out.println(" 4 - create account(including Transactions) in Bank1");
         System.out.println(" 5 - Account already exists throw");
@@ -22,6 +23,15 @@ public class Praktikum3 {
         System.out.println(" 9 - remove Transaction c from Account1");
         System.out.println("10 - Transaction does not exist throw");
         System.out.println("11 - Account contains Transaction");
+        System.out.println("-------------------------------------------");
+        System.out.println("12 - getAccountBalance (Payment 10, incomingTransfer 100, outgoingTransfer 1000");
+        System.out.println("13 - getAccountBalance (Payment 10, incomingTransfer 100, outgoingTransfer 1000 (PrivateBankAlt)");
+        System.out.println("-------------------------------------------");
+        System.out.println("14 - getTransactions");
+        System.out.println("15 - Transactions sorted ascending");
+        System.out.println("16 - Transactions sorted descending");
+        System.out.println("17 - only positive Transactions");
+        System.out.println("18 - only negative Transactions");
         System.out.println("0 - Stop");
 
         Scanner newinput = new Scanner(System.in);
@@ -30,9 +40,16 @@ public class Praktikum3 {
         do{
             bank.PrivateBank a = new bank.PrivateBank("TestBank1",0.1,0.5);
             bank.PrivateBank b = new bank.PrivateBank("TestBank2",0.2,0.4);
+            bank.PrivateBankAlt alt = new bank.PrivateBankAlt("TestBankAlt",0.1,0.5);
 
             bank.Payment c = new bank.Payment("22.11.2021",1000,"c");
             bank.Payment d = new bank.Payment("22.11.2021",2000,"d");
+
+            bank.Payment Payment = new bank.Payment("22.11.2021",10,"Payment");
+            bank.Transfer Transferin = new bank.Transfer("22.11.2021",100,"Transferin","random","Account1");
+            bank.Transfer Transferout = new bank.Transfer("22.11.2021",1000,"Transferout", "Account1","random");
+            bank.IncomingTransfer incomingTransfer = new bank.IncomingTransfer(Transferin);
+            bank.OutgoingTransfer outgoingTransfer = new bank.OutgoingTransfer(Transferout);
 
             input = newinput.nextInt();
             try {
@@ -103,7 +120,79 @@ public class Praktikum3 {
                         break;
 
                     case 11:
-                        System.out.println("11 - Account contains Transaction");
+                        System.out.println("11 - Account1 contains Transaction c");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1",c);
+                        System.out.println(a.toString() + a.containsTransaction("Account1",c));
+                        break;
+
+                    case 12:
+                        System.out.println("12 - getAccountBalance (Payment 10, incomingTransfer 100, outgoingTransfer 1000");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1", Payment);
+                        a.addTransaction("Account1", incomingTransfer);
+                        a.addTransaction("Account1", outgoingTransfer);
+                        System.out.println(a.toString() + "\n" + "AccountBalance: " + a.getAccountBalance("Account1"));
+                        break;
+
+                    case 13:
+                        System.out.println("getAccountBalance (Payment 10, incomingTransfer 100, outgoingTransfer 1000 (PrivateBankAlt):");
+                        alt.createAccount("Account1");
+                        alt.addTransaction("Account1", Payment);
+                        alt.addTransaction("Account1", Transferin);
+                        alt.addTransaction("Account1", Transferout);
+                        System.out.println(alt.toString() + "\n" + "AccountBalance: " + alt.getAccountBalanceAlt("Account1"));
+                        break;
+
+                    case 14:
+                        System.out.println("getTransactions: ");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1", Payment);
+                        a.addTransaction("Account1", incomingTransfer);
+                        a.addTransaction("Account1", outgoingTransfer);
+
+                        System.out.println(a.getTransactions("Account1"));
+                        break;
+
+                    case 15:
+                        System.out.println("Transactions sorted ascending:");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1", Payment);
+                        a.addTransaction("Account1", incomingTransfer);
+                        a.addTransaction("Account1", outgoingTransfer);
+
+                        System.out.println(a.getTransactionsSorted("Account1",true));
+                        break;
+
+                    case 16:
+                        System.out.println("16 - Transactions sorted descending:");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1", Payment);
+                        a.addTransaction("Account1", incomingTransfer);
+                        a.addTransaction("Account1", outgoingTransfer);
+
+                        System.out.println(a.getTransactionsSorted("Account1",false));
+                        break;
+
+                    case 17:
+                        System.out.println("only positive Transactions:");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1", Payment);
+                        a.addTransaction("Account1", incomingTransfer);
+                        a.addTransaction("Account1", outgoingTransfer);
+
+                        System.out.println(a.getTransactionsByType("Account1",true));
+                        break;
+
+                    case 18:
+                        System.out.println("only negative Transactions:");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1", Payment);
+                        a.addTransaction("Account1", incomingTransfer);
+                        a.addTransaction("Account1", outgoingTransfer);
+
+                        System.out.println(a.getTransactionsByType("Account1",false));
+                        break;
 
                 }
             } catch (   AccountAlreadyExistsException |

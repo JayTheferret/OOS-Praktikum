@@ -55,6 +55,10 @@ public class PrivateBank implements Bank {
         this(a.name, a.incomingInterest, a.outgoingInterest);
     }
 
+    /**
+     * overrides toString, outputs PrivateBank to terminal
+     * @return output to terminal
+     */
     @Override
     public String toString() {
         return ("------PrivateBank:------ \n"
@@ -64,6 +68,12 @@ public class PrivateBank implements Bank {
                 + "Transactions:     " + this.accountsToTransactions.toString()); //?
     }
 
+    /**
+     * overrides equals method
+     * compares if to PrivateBanks are equal to eachother
+     * @param obj PrivateBank to be compared to
+     * @return true if PrivateBanks are identical, false if not
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -80,11 +90,25 @@ public class PrivateBank implements Bank {
                 this.accountsToTransactions.equals(pbank.accountsToTransactions)); //nutzt pro gespeicherter transaction equals von transaction
     }
 
-
+    /**
+     * Adds an account with only a name and empty transaction list to the bank, using. If the account already exists,
+     * an exception is thrown.
+     *
+     * @param account the account to be added
+     * @throws AccountAlreadyExistsException
+     */
     public void createAccount(String account) throws AccountAlreadyExistsException {
         createAccount(account, new ArrayList<>());
     }
 
+    /**
+     * Adds an account (with all specified transactions) to the bank. If the account already exists,
+     * an exception is thrown.
+     *
+     * @param account the account to be added
+     * @param transactions
+     * @throws AccountAlreadyExistsException if the account already exists
+     */
     public void createAccount(String account, List<Transaction> transactions) throws AccountAlreadyExistsException {
         if (accountsToTransactions.containsKey(account)) {
             throw new AccountAlreadyExistsException();
@@ -92,6 +116,14 @@ public class PrivateBank implements Bank {
         accountsToTransactions.put(account, transactions);
     }
 
+    /**Adds a transaction to an account. If the specified account does not exist, an exception is
+     * thrown. If the transaction already exists, an exception is thrown.
+     *
+     * @param account     the account to which the transaction is added
+     * @param transaction the transaction which is added to the account
+     * @throws TransactionAlreadyExistException if the transaction already exists
+     * @throws AccountDoesNotExistException if the Account does not exist
+     */
     public void addTransaction(String account, Transaction transaction) throws TransactionAlreadyExistException, AccountDoesNotExistException {
 
         if (!accountsToTransactions.containsKey(account)) {
@@ -108,6 +140,14 @@ public class PrivateBank implements Bank {
         accountsToTransactions.get(account).add(transaction);
     }
 
+    /**
+     * Removes a transaction from an account. If the transaction does not exist, an exception is
+     * thrown.
+     *
+     * @param account     the account from which the transaction is removed
+     * @param transaction the transaction which is added to the account
+     * @throws TransactionDoesNotExistException  if the transaction cannot be found
+     */
     public void removeTransaction(String account, Transaction transaction) throws TransactionDoesNotExistException {
         if (!containsTransaction(account, transaction)) {
             throw new TransactionDoesNotExistException();
@@ -116,10 +156,23 @@ public class PrivateBank implements Bank {
         accountsToTransactions.get(account).remove(transaction);
     }
 
+    /**
+     * Checks whether the specified transaction for a given account exists.
+     *
+     * @param account     the account from which the transaction is checked
+     * @param transaction the transaction which is added to the account
+     * @return true if transaction exists for given account, false if not
+     */
     public boolean containsTransaction(String account, Transaction transaction) {
         return (accountsToTransactions.get(account).contains(transaction));
     }//-------
 
+    /**
+     * Calculates and returns the current account balance.
+     *
+     * @param account the selected account
+     * @return the current account balance
+     */
     public double getAccountBalance(String account) {
 
         double balance = 0;
@@ -142,11 +195,25 @@ public class PrivateBank implements Bank {
         */
     }
 
+    /**
+     * Returns a list of transactions for an account.
+     *
+     * @param account the selected account
+     * @return the list of transactions
+     */
     public List<Transaction> getTransactions(String account) {
 
         return accountsToTransactions.get(account);
     }
 
+    /**
+     * Returns a sorted list (-> calculated amounts) of transactions for a specific account . Sorts the list either in ascending or descending order
+     * (or empty).
+     *
+     * @param account the selected account
+     * @param asc     selects if the transaction list is sorted ascending or descending
+     * @return the list of transactions
+     */
     public List<Transaction> getTransactionsSorted(String account, boolean asc) {
         /*
         if(asc){
@@ -168,6 +235,13 @@ public class PrivateBank implements Bank {
         return newList;
     }
 
+    /**
+     * Returns a list of either positive or negative transactions (-> calculated amounts).
+     *
+     * @param account  the selected account
+     * @param positive selects if positive  or negative transactions are listed
+     * @return the list of transactions
+     */
     public List<Transaction> getTransactionsByType(String account, boolean positive) {
         //List<Transaction> newList = new ArrayList<>(accountsToTransactions.get(account));
         List<Transaction> posList = new ArrayList<>();

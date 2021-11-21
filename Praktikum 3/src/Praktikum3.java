@@ -32,6 +32,7 @@ public class Praktikum3 {
         System.out.println("16 - Transactions sorted descending");
         System.out.println("17 - only positive Transactions");
         System.out.println("18 - only negative Transactions");
+        System.out.println("19 - Transactions sorted -> empty");
         System.out.println("0 - Stop");
 
         Scanner newinput = new Scanner(System.in);
@@ -191,6 +192,12 @@ public class Praktikum3 {
                         a.addTransaction("Account1", incomingTransfer);
                         a.addTransaction("Account1", outgoingTransfer);
 
+                        System.out.println(a.getTransactionsByType("Account1",false));
+                        break;
+
+                    case 19:
+                        System.out.println("Transactions sorted -> empty:");
+                        a.createAccount("Account1");
                         System.out.println(a.getTransactionsByType("Account1",false));
                         break;
 

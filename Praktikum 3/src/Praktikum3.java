@@ -1,105 +1,118 @@
 import bank.Payment;
 import bank.Transfer;
+import bank.exceptions.AccountAlreadyExistsException;
+import bank.exceptions.AccountDoesNotExistException;
+import bank.exceptions.TransactionAlreadyExistException;
+import bank.exceptions.TransactionDoesNotExistException;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Praktikum3 {
     public static void main(String [] args){
-        System.out.println("Konstruktoren + Ausgabe mit toString()");
-        System.out.println("1 - Erstelle Payment mit Konstruktor 1");
-        System.out.println("2 - Erstelle Payment mit Konstruktor 2");
-        System.out.println("3 - Erstelle Payment mit Copy-Konstruktor");
-        System.out.println("4 - Erstelle Transfer mit Konstruktor 1");
-        System.out.println("5 - Erstelle Transfer mit Konstruktor 2");
-        System.out.println("6 - Erstelle Transfer mit Copy-Konstruktor");
-        System.out.println("------------------------------------------");
-        System.out.println("7 - Test incomingInterest");
-        System.out.println("8 - Test outgoingInterest");
-        System.out.println("9 - equals()/== Test mit Copy7:");
+        System.out.println("Praktikum 3");
+        System.out.println(" 1 - print Private Bank (print(toString))");
+        System.out.println(" 2 - test equals");
+        System.out.println(" 3 - create 2 accounts(with only Name)in Bank1");
+        System.out.println(" 4 - create account(including Transactions) in Bank1");
+        System.out.println(" 5 - Account already exists throw");
+        System.out.println(" 6 - Add transaction c to Account1)");
+        System.out.println(" 7 - transaction already exists throw");
+        System.out.println(" 8 - Account does not exist throw");
+        System.out.println(" 9 - remove Transaction c from Account1");
+        System.out.println("10 - Transaction does not exist throw");
+        System.out.println("11 - Account contains Transaction");
         System.out.println("0 - Stop");
-
 
         Scanner newinput = new Scanner(System.in);
         int input = 1;
 
         do{
+            bank.PrivateBank a = new bank.PrivateBank("TestBank1",0.1,0.5);
+            bank.PrivateBank b = new bank.PrivateBank("TestBank2",0.2,0.4);
+
+            bank.Payment c = new bank.Payment("22.11.2021",1000,"c");
+            bank.Payment d = new bank.Payment("22.11.2021",2000,"d");
+
             input = newinput.nextInt();
+            try {
+                switch(input){
 
-            switch(input){
+                    case 1:
+                        System.out.println("print Private Bank (print(toString)):");
+                        System.out.println(a.toString());
+                        break;
 
-                case 1:
-                    System.out.println("Erstelle Payment mit Konstruktor 1:");
-                    bank.Payment a = new bank.Payment("25.10.2021",12.50,"Hier koennte Ihre Werbung stehen.");
-                    System.out.println(a);
-                    break;
+                    case 2:
+                        System.out.println("test equals:");
+                        System.out.println("Bank1 equals Bank1: " + a.equals(a));
+                        System.out.println("Bank1 equals Bank2: " + a.equals(b));
+                        break;
 
-                case 2:
-                    System.out.println("Erstelle Payment mit Konstruktor 2:");
-                    bank.Payment b = new bank.Payment("25.10.2021",12.50,"Hier koennte Ihre Werbung stehen.",0.1,0.2);
-                    System.out.println(b);
-                    break;
+                    case 3:
+                        System.out.println("create 2 accounts(with only Name)in Bank1:");
+                        a.createAccount("Account1");
+                        a.createAccount("Account2");
+                        System.out.println(a.toString());
+                        break;
 
-                case 3:
-                    System.out.println("Erstelle Payment mit Copy-Konstruktor:");
-                    System.out.println("Zu kopieren:");
-                    bank.Payment tocopy = new bank.Payment("25.10.2021",12.50,"Kopier mich.",0.1,0.2);
-                    System.out.println(tocopy);
-                    System.out.println("Kopie:");
-                    bank.Payment c = new bank.Payment(tocopy);
-                    System.out.println(c);
-                    break;
+                    case 4:
+                        System.out.println("create account(including Transactions) in Bank1:");
+                        a.createAccount("Account1", Arrays.asList(c,d));
+                        System.out.println(a.toString());
+                        break;
 
-                //-----------------
+                    case 5:
+                        System.out.println("Account already exists throw:");
+                        a.createAccount("Account1");
+                        a.createAccount("Account1");
+                        break;
 
-                case 4:
-                    System.out.println("Erstelle Transfer mit Konstruktor 1:");
-                    bank.Transfer d = new bank.Transfer("25.10.2021", 12.50,"Hier koennte Ihre Werbung stehen.");
-                    System.out.println(d);
-                    break;
+                    case 6:
+                        System.out.println("Add transaction c to Account1):");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1",c);
+                        System.out.println(a.toString());
+                        break;
 
-                case 5:
-                    System.out.println("Erstelle Transfer mit Konstruktor 2:");
-                    bank.Transfer e = new bank.Transfer("25.10.2021", 12.50,"Hier koennte Ihre Werbung stehen.", "Sender", "Empfaenger");
-                    System.out.println(e);
-                    break;
+                    case 7:
+                        System.out.println("transaction already exists throw:");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1",c);
+                        a.addTransaction("Account1",c);
+                        break;
 
-                case 6:
-                    System.out.println("Erstelle Transfer mit Copy-Konstruktor:");
-                    System.out.println("Zu kopieren:");
-                    bank.Transfer tocopy2 = new bank.Transfer("25.10.2021", 12.50,"Kopier mich.", "Sender", "Empfaenger");
-                    System.out.println(tocopy2);
-                    System.out.println("Kopie:");
-                    bank.Transfer f = new bank.Transfer(tocopy2);
-                    System.out.println(f);
-                    break;
+                    case 8:
+                        System.out.println("8 - Account does not exist throw:");
+                        a.addTransaction("Account1",c);
+                        break;
 
-                case 7:
-                    System.out.println("7 - Test incomingInterest:");
-                    bank.Payment g = new bank.Payment("08.11.2021",1000,"Test.",0.05,0);
-                    System.out.println(g);
-                    System.out.println("New amount: " + g.calculate());
-                    break;
+                    case 9:
+                        System.out.println("remove Transaction c from Account1:");
+                        a.createAccount("Account1");
+                        a.addTransaction("Account1",c);
+                        System.out.println("before removal: \n" + a.toString());
+                        a.removeTransaction("Account1",c);
+                        System.out.println("after removal: \n" + a.toString());
+                        break;
 
-                case 8:
-                    System.out.println(("8 - Test outgoingInterest:"));
-                    bank.Payment h = new Payment("08.11.2021",-1000,"Test.",0,0.1);
-                    System.out.println(h);
-                    System.out.println("New amount: "+ h.calculate());
-                    break;
+                    case 10:
+                        System.out.println("Transaction does not exist throw:");
+                        a.createAccount("Account1");
+                        a.removeTransaction("Account1",c);
+                        break;
 
-                case 9:
-                    System.out.println("equals()/== Test:");
-                    bank.Payment i = new Payment("08.11.2021",1000,"Beispiel 1",0.05,0);
-                    System.out.println("Original: \n" + i);
-                    bank.Payment j = new bank.Payment(i);
-                    System.out.println("Kopie: \n" + j);
-                    System.out.println("Equal: " + i.equals(j));
-                    System.out.println("== :   " + (i == j));
-                    break;
+                    case 11:
+                        System.out.println("11 - Account contains Transaction");
 
+                }
+            } catch (   AccountAlreadyExistsException |
+                        AccountDoesNotExistException |
+                        TransactionDoesNotExistException |
+                        TransactionAlreadyExistException e) {
+                e.printStackTrace();
             }
+
         }while(input != 0);
-
-
     }
 }

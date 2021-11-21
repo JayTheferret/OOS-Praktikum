@@ -100,7 +100,7 @@ public class Payment extends Transaction{
      */
     @Override
     public String toString(){
-        return ( "  --------------Payment-------------- \n"
+        return ( "\n  --------------Payment-------------- \n"
                 + super.toString()
                 + "  Incoming Interest: " + this.incomingInterest + "\n"
                 + "  Outgoing Interest: " + this.outgoingInterest + "\n"

@@ -4,7 +4,14 @@ import bank.exceptions.AccountDoesNotExistException;
 import bank.exceptions.AccountAlreadyExistsException;
 import bank.exceptions.TransactionAlreadyExistException;
 import bank.exceptions.TransactionDoesNotExistException;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,6 +22,13 @@ import java.util.stream.Collectors;
  *  implements the interface bank
  */
 public class PrivateBank implements Bank {
+
+    private static GsonBuilder builder = new GsonBuilder()
+            .registerTypeAdapter(Payment.class, new CustomSerializer())
+            .registerTypeAdapter(IncomingTransfer.class, new CustomSerializer())
+            .registerTypeAdapter(OutgoingTransfer.class, new CustomSerializer())
+            .registerTypeAdapter(Transaction.class, new CustomSerializer())
+            .setPrettyPrinting();
 
     private String name;
     private double incomingInterest;
@@ -45,13 +59,15 @@ public class PrivateBank implements Bank {
         this.outgoingInterest = outgoingInterest;
     }
 
-    public PrivateBank(String name, double incomingInterest, double outgoingInterest) {
+    public PrivateBank(String name, double incomingInterest, double outgoingInterest) throws AccountAlreadyExistsException, IOException {
         this.name = name;
         this.incomingInterest = incomingInterest;
         this.outgoingInterest = outgoingInterest;
+
+        readAccounts();
     }
 
-    public PrivateBank(PrivateBank a) {
+    public PrivateBank(PrivateBank a) throws AccountAlreadyExistsException, IOException {
         this(a.name, a.incomingInterest, a.outgoingInterest);
     }
 
@@ -97,7 +113,7 @@ public class PrivateBank implements Bank {
      * @param account the account to be added
      * @throws AccountAlreadyExistsException
      */
-    public void createAccount(String account) throws AccountAlreadyExistsException {
+    public void createAccount(String account) throws AccountAlreadyExistsException, IOException {
         createAccount(account, new ArrayList<>());
     }
 
@@ -109,11 +125,13 @@ public class PrivateBank implements Bank {
      * @param transactions
      * @throws AccountAlreadyExistsException if the account already exists
      */
-    public void createAccount(String account, List<Transaction> transactions) throws AccountAlreadyExistsException {
+    public void createAccount(String account, List<Transaction> transactions) throws AccountAlreadyExistsException, IOException {
         if (accountsToTransactions.containsKey(account)) {
             throw new AccountAlreadyExistsException();
         }
         accountsToTransactions.put(account, transactions);
+
+        writeAccount(account);
     }
 
     /**Adds a transaction to an account. If the specified account does not exist, an exception is
@@ -124,7 +142,7 @@ public class PrivateBank implements Bank {
      * @throws TransactionAlreadyExistException if the transaction already exists
      * @throws AccountDoesNotExistException if the Account does not exist
      */
-    public void addTransaction(String account, Transaction transaction) throws TransactionAlreadyExistException, AccountDoesNotExistException {
+    public void addTransaction(String account, Transaction transaction) throws TransactionAlreadyExistException, AccountDoesNotExistException, IOException {
 
         if (!accountsToTransactions.containsKey(account)) {
             throw new AccountDoesNotExistException();
@@ -138,6 +156,8 @@ public class PrivateBank implements Bank {
             ((Payment) transaction).setOutgoingInterest(this.getOutgoingInterest());
         }
         accountsToTransactions.get(account).add(transaction);
+
+        writeAccount(account);
     }
 
     /**
@@ -148,12 +168,14 @@ public class PrivateBank implements Bank {
      * @param transaction the transaction which is added to the account
      * @throws TransactionDoesNotExistException  if the transaction cannot be found
      */
-    public void removeTransaction(String account, Transaction transaction) throws TransactionDoesNotExistException {
+    public void removeTransaction(String account, Transaction transaction) throws TransactionDoesNotExistException, IOException {
         if (!containsTransaction(account, transaction)) {
             throw new TransactionDoesNotExistException();
         }
 
         accountsToTransactions.get(account).remove(transaction);
+
+        writeAccount(account);
     }
 
     /**
@@ -175,16 +197,7 @@ public class PrivateBank implements Bank {
      */
     public double getAccountBalance(String account) {
 
-        /*
-        double balance = 0;
-
-        for (int i = 0; i < accountsToTransactions.get(account).size(); i++) {
-            balance += accountsToTransactions.get(account).get(i).calculate();
-        }
-        return balance;*/
-
-
-        double balance = 0;
+     double balance = 0;
 
         for(Transaction transaction : accountsToTransactions.get(account)) {
             balance += transaction.calculate();
@@ -269,5 +282,41 @@ public class PrivateBank implements Bank {
         return list;
         */
 
+    }
+
+    /**
+     * method to read files, containing accounts and Transactions into a PrivateBank
+     *
+     * @throws IOException when file doesnt exist?
+     * @throws AccountAlreadyExistsException if accounts to be added already exist in bank
+     */
+    private void readAccounts() throws IOException, AccountAlreadyExistsException {
+
+        var customGson = builder.create();
+
+        File dir = new File("./files");
+
+        for(File file : dir.listFiles()){
+            FileReader reader = new FileReader(file);
+            JsonReader jreader = new JsonReader(reader);
+
+            Transaction[] transarray = customGson.fromJson(jreader, Transaction[].class);
+            this.createAccount(file.getName().replace(".json",""), Arrays.asList(transarray));
+        }
+    }
+
+    /**
+     * method to write a account and its transactiobns into files deserializing them
+     *
+     * @param account the account to be deserialized
+     * @throws IOException when file already exists?
+     */
+    private void writeAccount(String account) throws IOException{
+        var customGson = builder.create();
+
+        FileWriter writer = new FileWriter("./files/"+ account + ".json");
+        customGson.toJson(this.getTransactions(account), writer);
+
+        writer.close();
     }
 }

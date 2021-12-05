@@ -112,6 +112,7 @@ public class Praktikum3 {
                         System.out.println("before removal: \n" + a.toString());
                         a.removeTransaction("Account1",c);
                         System.out.println("after removal: \n" + a.toString());
+
                         break;
 
                     case 10:

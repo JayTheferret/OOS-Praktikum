@@ -62,10 +62,11 @@ public class Praktikum4 {
                 case 3:
                     File dir = new File("./files/");
                     for(File file : dir.listFiles()) {
-                        file.delete();
-
-                        break;
+                        System.out.println("deleting: " + file);
+                        System.out.println(file.delete());
+                        //break;
                     }
+                    break;
             }
         }while(input != 0);
     }

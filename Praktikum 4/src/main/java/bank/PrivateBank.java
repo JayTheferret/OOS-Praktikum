@@ -302,6 +302,8 @@ public class PrivateBank implements Bank {
 
             Transaction[] transarray = customGson.fromJson(jreader, Transaction[].class);
             this.createAccount(file.getName().replace(".json",""), Arrays.asList(transarray));
+
+            reader.close();
         }
     }
 

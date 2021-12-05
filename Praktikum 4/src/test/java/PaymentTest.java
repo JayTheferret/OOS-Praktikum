@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
@@ -38,6 +39,8 @@ public class PaymentTest {
         assertEquals(b.getDescription(), a.getDescription());
         assertEquals(b.getIncomingInterest(),a.getIncomingInterest());
         assertEquals(b.getOutgoingInterest(), a.getOutgoingInterest());
+
+        //original verändern gucken das neu nich tändert
     }
 
     @Test
@@ -49,14 +52,14 @@ public class PaymentTest {
 
     @Test
     void equalsTest(){
-        assumeTrue(a.equals(b));
-        assumeFalse(a.equals(c));
+        assertTrue(a.equals(b));
+        assertFalse(a.equals(c));
     }
 
     @Test
     void toString_Test(){
         assertEquals( "\n  --------------Payment-------------- \n"
-                    +"  Date:              " + a.getDate() + "\n"
+                    + "  Date:              " + a.getDate() + "\n"
                     + "  Amount:            " + a.getAmount()+ "\n"
                     + "  New Amount:        " + a.calculate() + "\n"
                     + "  Description:       " + a.getDescription() + "\n"

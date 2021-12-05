@@ -4,6 +4,7 @@ import bank.Transfer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
@@ -52,8 +53,8 @@ public class TransferTest {
 
     @Test
     void equalsTest(){
-        assumeTrue(a.equals(b));
-        assumeFalse(a.equals(c));
+        assertTrue(a.equals(b));
+        assertFalse(a.equals(c));
     }
 
     @Test

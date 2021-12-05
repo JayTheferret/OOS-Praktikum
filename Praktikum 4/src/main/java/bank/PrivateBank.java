@@ -187,7 +187,7 @@ public class PrivateBank implements Bank {
      */
     public boolean containsTransaction(String account, Transaction transaction) {
         return (accountsToTransactions.get(account).contains(transaction));
-    }//-------
+    }
 
     /**
      * Calculates and returns the current account balance.

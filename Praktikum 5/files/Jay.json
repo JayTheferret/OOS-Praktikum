@@ -1,0 +1,22 @@
+[
+  {
+    "CLASSNAME": "Payment",
+    "INSTANCE": {
+      "incomingInterest": 0.1,
+      "outgoingInterest": 0.5,
+      "date": "1.1",
+      "amount": 100.0,
+      "description": "test2"
+    }
+  },
+  {
+    "CLASSNAME": "IncomingTransfer",
+    "INSTANCE": {
+      "sender": "random",
+      "recipient": "Account1",
+      "date": "22.11.2021",
+      "amount": 100.0,
+      "description": "Transferin"
+    }
+  }
+]

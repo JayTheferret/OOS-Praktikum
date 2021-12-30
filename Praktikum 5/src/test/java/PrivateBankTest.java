@@ -1,9 +1,9 @@
-import bank.Payment;
-import bank.PrivateBank;
-import bank.exceptions.AccountAlreadyExistsException;
-import bank.exceptions.AccountDoesNotExistException;
-import bank.exceptions.TransactionAlreadyExistException;
-import bank.exceptions.TransactionDoesNotExistException;
+import de.example.praktikum5.bank.Payment;
+import de.example.praktikum5.bank.PrivateBank;
+import de.example.praktikum5.bank.exceptions.AccountAlreadyExistsException;
+import de.example.praktikum5.bank.exceptions.AccountDoesNotExistException;
+import de.example.praktikum5.bank.exceptions.TransactionAlreadyExistException;
+import de.example.praktikum5.bank.exceptions.TransactionDoesNotExistException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,9 +25,9 @@ public class PrivateBankTest {
     @BeforeEach
     void init() throws AccountAlreadyExistsException, IOException, TransactionAlreadyExistException, AccountDoesNotExistException {
         a = new PrivateBank("TestBank1",0.1,0.5);
-        b = new bank.Payment("22.11.2021",1000,"Beschreibung1");
-        c = new bank.Payment("22.11.2021",1000,"Beschreibung2");
-        d = new bank.Payment("22.11.2021",-10,"Beschreibung3");
+        b = new de.example.praktikum5.bank.Payment("22.11.2021",1000,"Beschreibung1");
+        c = new de.example.praktikum5.bank.Payment("22.11.2021",1000,"Beschreibung2");
+        d = new de.example.praktikum5.bank.Payment("22.11.2021",-10,"Beschreibung3");
         a.createAccount("Account1");
         a.addTransaction("Account1",b);
         a.addTransaction("Account1",c);

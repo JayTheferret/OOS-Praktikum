@@ -1,4 +1,4 @@
-package bank;
+package de.example.praktikum5.bank;
 
 import com.google.gson.*;
 
@@ -20,7 +20,7 @@ public class CustomSerializer implements JsonSerializer<Transaction>, JsonDeseri
         JsonObject jsonObj = jsonElement.getAsJsonObject();
         JsonObject jsonInst = jsonObj.get("INSTANCE").getAsJsonObject();
 
-        //new Gson().fromJson(element, Payment.class);3
+        //new Gson().fromJson(element, Payment.class);
 
         if(jsonObj.get("CLASSNAME").getAsString().equals("Payment")){
             var pay = new Payment(

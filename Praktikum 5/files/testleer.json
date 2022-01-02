@@ -1,0 +1,22 @@
+[
+  {
+    "CLASSNAME": "OutgoingTransfer",
+    "INSTANCE": {
+      "sender": "testleer",
+      "recipient": "null",
+      "date": "11",
+      "amount": 11.0,
+      "description": "ff"
+    }
+  },
+  {
+    "CLASSNAME": "IncomingTransfer",
+    "INSTANCE": {
+      "sender": "null",
+      "recipient": "testleer",
+      "date": "11111",
+      "amount": 11.0,
+      "description": "des"
+    }
+  }
+]

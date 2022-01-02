@@ -5,9 +5,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.example.praktikum5.AccountController">
    <children>
-      <Label id="AccountName" fx:id="accountName" layoutX="38.0" layoutY="38.0" text="AccountName: Placeholder" />
-      <Label fx:id="balance" layoutX="215.0" layoutY="38.0" text="Kontostand: test" />
-      <ListView fx:id="list" layoutX="38.0" layoutY="68.0" prefHeight="464.0" prefWidth="423.0">
+      <Label id="AccountName" fx:id="accountName" layoutX="50.0" layoutY="50.0" text="AccountName: Placeholder" />
+      <Label fx:id="balance" layoutX="215.0" layoutY="50.0" text="Kontostand: test" />
+      <ListView fx:id="list" layoutX="50.0" layoutY="70.0" prefHeight="464.0" prefWidth="423.0">
          <contextMenu>
             <ContextMenu fx:id="cmList">
                <items>
@@ -16,10 +16,11 @@
             </ContextMenu>
          </contextMenu>
       </ListView>
-      <Button layoutX="500.0" layoutY="68.0" mnemonicParsing="false" onAction="#back" text="back" />
-      <Button layoutX="503.0" layoutY="103.0" mnemonicParsing="false" text="aufsteigend" onAction="#sortasc" />
-      <Button layoutX="505.0" layoutY="144.0" mnemonicParsing="false" text="absteigend" onAction="#sortdec" />
-      <Button layoutX="503.0" layoutY="189.0" mnemonicParsing="false" text="positive" onAction="#getpos"/>
-      <Button layoutX="501.0" layoutY="227.0" mnemonicParsing="false" text="negative" onAction="#getneg" />
+      <Button layoutX="50.0" layoutY="550.0" mnemonicParsing="false" onAction="#back" text="back" />
+      <Button layoutX="500.0" layoutY="70.0" mnemonicParsing="false" text="aufsteigend" onAction="#sortasc" />
+      <Button layoutX="500.0" layoutY="100.0" mnemonicParsing="false" text="absteigend" onAction="#sortdec" />
+      <Button layoutX="500.0" layoutY="130.0" mnemonicParsing="false" text="positive" onAction="#getpos"/>
+      <Button layoutX="500.0" layoutY="160.0" mnemonicParsing="false" text="negative" onAction="#getneg" />
+      <Button layoutX="500.0" layoutY="220.0" mnemonicParsing="false" text="new Transaction" onAction="#createTrans" />
    </children>
 </AnchorPane>

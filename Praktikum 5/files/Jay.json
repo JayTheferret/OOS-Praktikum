@@ -6,16 +6,6 @@
       "outgoingInterest": 0.5,
       "date": "1.1",
       "amount": 100.0,
-      "description": "test"
-    }
-  },
-  {
-    "CLASSNAME": "Payment",
-    "INSTANCE": {
-      "incomingInterest": 0.1,
-      "outgoingInterest": 0.5,
-      "date": "1.1",
-      "amount": 100.0,
       "description": "test2"
     }
   },
@@ -27,6 +17,26 @@
       "date": "22.11.2021",
       "amount": 100.0,
       "description": "Transferin"
+    }
+  },
+  {
+    "CLASSNAME": "OutgoingTransfer",
+    "INSTANCE": {
+      "sender": "Jay",
+      "recipient": "random",
+      "date": "11",
+      "amount": 190.0,
+      "description": "outgoing"
+    }
+  },
+  {
+    "CLASSNAME": "IncomingTransfer",
+    "INSTANCE": {
+      "sender": "random",
+      "recipient": "Jay",
+      "date": "11",
+      "amount": 666.0,
+      "description": "lol"
     }
   }
 ]

@@ -198,23 +198,6 @@ public class PrivateBankAlt implements Bank {
      */
     public  double getAccountBalanceAlt(String account){
 
-        /*double balance = 0;
-
-        for(int i = 0; i < accountsToTransactions.get(account).size(); i++){
-
-            if(accountsToTransactions.get(account).get(i) instanceof Transfer){
-                if(account.equals(((Transfer) accountsToTransactions.get(account).get(i)).getSender())){
-                    balance -= accountsToTransactions.get(account).get(i).calculate();
-                }
-                else if(!account.equals(((Transfer) accountsToTransactions.get(account).get(i)).getSender())){
-                    balance += accountsToTransactions.get(account).get(i).calculate();
-                }
-            }
-            else {//bei payment objekten und incoming
-               balance += accountsToTransactions.get(account).get(i).calculate();
-            }
-        }*/
-
         double balance = 0.0;
 
         for (Transaction transaction : accountsToTransactions.get(account)) {

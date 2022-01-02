@@ -49,10 +49,6 @@ public class MainController {
 
         AccountController ac = fxmlLoader.getController();
         ac.setInformation(AccountListe.getSelectionModel().getSelectedItem(), fxmlBank);
-
-
-
-
     }
 
     /**
@@ -90,10 +86,9 @@ public class MainController {
         }
     }
 
-
     /**
      * method to create a new Account in GUI
-     * 
+     *
      * @param actionEvent
      * @throws AccountAlreadyExistsException
      * @throws IOException
@@ -106,9 +101,9 @@ public class MainController {
         dialog.setHeaderText("choose a name for the account: ");
 
         var input = dialog.showAndWait();
-        System.out.println("Chosen Account name: " + input.get());
 
         if(input.isPresent()){
+            System.out.println("Chosen Account name: " + input.get());
             fxmlBank.createAccount(input.get());
             refresh();
         }

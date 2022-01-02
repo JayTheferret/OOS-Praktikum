@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -54,7 +55,15 @@ public class MainController {
 
     }
 
+    /**
+     * method to delete Account in GUI
+     *
+     * @param event
+     * @throws AccountDoesNotExistException
+     * @throws IOException
+     */
     @FXML public void loeschen(ActionEvent event) throws AccountDoesNotExistException, IOException {
+        System.out.println("delete Button pressed");
 
         String account = AccountListe.getSelectionModel().getSelectedItem();
 
@@ -63,19 +72,45 @@ public class MainController {
         }
 
         Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+
+        dialog.setTitle("Delete account");
+        dialog.setHeaderText("Do you really wanna delete the Account: " + account +" ?");
+
+        ButtonType yesButton = new ButtonType("yes");
+        ButtonType noButton = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        dialog.getButtonTypes().setAll(yesButton,noButton);
+
         var answer = dialog.showAndWait();
 
-        if(answer.get()== ButtonType.OK){
+        if(answer.get()== yesButton){
             System.out.println("Lösche Account " + account );
             fxmlBank.deleteAccount(account);
             refresh();
         }
-
-        /*Dialog abfrage = new Dialog();
-
-        abfrage.setTitle("Wollen Sie diesen Account wirklich löschen?");
-        abfrage.show();*/
     }
 
 
+    /**
+     * method to create a new Account in GUI
+     * 
+     * @param actionEvent
+     * @throws AccountAlreadyExistsException
+     * @throws IOException
+     */
+    public void newAccount(ActionEvent actionEvent) throws AccountAlreadyExistsException, IOException {
+        System.out.println("add new Account Button pressed");
+
+        TextInputDialog dialog = new TextInputDialog("Account Name");
+        dialog.setTitle("Create a new Account");
+        dialog.setHeaderText("choose a name for the account: ");
+
+        var input = dialog.showAndWait();
+        System.out.println("Chosen Account name: " + input.get());
+
+        if(input.isPresent()){
+            fxmlBank.createAccount(input.get());
+            refresh();
+        }
+    }
 }

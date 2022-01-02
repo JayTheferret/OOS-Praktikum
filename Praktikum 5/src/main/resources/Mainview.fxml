@@ -13,11 +13,11 @@
         <contextMenu>
             <ContextMenu fx:id="cmList">
                 <items>
-                    <MenuItem text="Auswählen" onAction="#auswaehlen"/>
-                    <MenuItem text="Löschen" onAction="#loeschen" />
+                    <MenuItem onAction="#auswaehlen" text="Auswählen" />
+                    <MenuItem onAction="#loeschen" text="Löschen" />
                 </items>
             </ContextMenu>
         </contextMenu>
     </ListView>
-    <Button text="test" />
+    <Button onAction="#newAccount" text="new account" />
 </VBox>

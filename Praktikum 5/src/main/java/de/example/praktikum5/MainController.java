@@ -33,6 +33,12 @@ public class MainController {
         AccountListe.getItems().addAll(fxmlBank.getAllAccounts());
     }
 
+    /**
+     * method to select a Item from the Accountlist and change into a Detail voew of the chosen account
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML public void auswaehlen(ActionEvent event) throws IOException {
 
         if(AccountListe.getSelectionModel().getSelectedItem() == null){

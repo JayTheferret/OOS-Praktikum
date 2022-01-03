@@ -29,9 +29,6 @@ public class Praktikum5 extends Application {
 
     public static void main(String [] args) throws AccountAlreadyExistsException, TransactionAlreadyExistException, AccountDoesNotExistException, IOException {
 
-
-
-
         System.out.println("Praktikum 4");
         System.out.println("1 - erstelle Bank mit Accounts/Payments(manuel) -> serializieren");
         System.out.println("2 - erstelle Bank aus Files -> deserializieren");
